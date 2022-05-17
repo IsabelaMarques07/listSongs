@@ -10,40 +10,31 @@ class ListPage extends StatefulWidget{
     return _ListPageState();
   }
 }
-
-List<Song> songList = [
-  Song(name: "Oi", artist: "Lagum"),
-  Song(name: "O Que é Que Tem", artist: "Jorge e Mateus"),
-  Song(name: "As It Was", artist: "Harry Styles"),
-  Song(name: "Steal My Girl", artist: "One Direction" ),
-];
-
 class _ListPageState extends State<ListPage>{
+
+  List<Song> songList = [
+    Song(name: "Veja Baby", artist: "Lagum"),
+    Song(name: "As It Was", artist: "Harry Styles"),
+    Song(name: "O Que é Que Tem", artist: "Jorge e Mateus"),
+    Song(name: "Steal My Girl", artist: "One Direction" ),
+  ];
 
   TextEditingController nameController = TextEditingController();
   TextEditingController artistController = TextEditingController();
+  FocusNode nameFocus = FocusNode();
+  FocusNode artistFocus = FocusNode();
 
-  String initialNameValue = '';
-    String initialArtistValue = '';
-
-  updateValue({required String nameValue, required String artistValue}){
+  addNewSong({required String songName, required String songArtist}){
     setState(() {
-      initialNameValue = nameValue;
-      initialArtistValue = artistValue;
-    });
-  }
-
-  cleanValue(){
-     setState(() {
-      initialNameValue = '';
-      initialArtistValue = '';
+      songList.insert(0, Song(name: songName, artist: songArtist));
     });
   }
 
   @override 
   Widget build(BuildContext context){
     return Scaffold(
-      body: Padding(
+      body: SingleChildScrollView(
+      child: Padding(
         padding: EdgeInsets.only(
           left: AppPaddings.borderPadding,
           right: AppPaddings.borderPadding,
@@ -52,43 +43,46 @@ class _ListPageState extends State<ListPage>{
         child: Column(children: [
           IsabelaForm(
             label:'Nome da música',
+            focusNode: nameFocus,
             userInputController: nameController,
+            onEditingComplete: (){
+              artistFocus.nextFocus();
+            },
           ),
           const SizedBox(height: 15),
           IsabelaForm(
             label:'Nome do artista',
-            userInputController: artistController,
-            onEditingComplete: (){
-               updateValue(nameValue: nameController.text, artistValue: artistController.text);
-            },
+            focusNode: artistFocus,
+            userInputController: artistController
             ),
-            const SizedBox(height: 15),
-            SingleChildScrollView(
-              child: Column(children: [
-                ListView.separated(
-                  separatorBuilder: (BuildContext context, int index){
-                    return const SizedBox(height: 15,);
-                  },
-                  shrinkWrap: true,
-                  itemCount: songList.length,
-                  itemBuilder: (context, index){
-                    var listItem = songList[index];
-                    return MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                      onTap: (){print(listItem.name);},
-                      child: IsabelaCard(
-                    leftText: listItem.name,
-                    rightText: " - "+listItem.artist,
-                  )
-                  )
-                );
-                })
-              ],)
-            )
+          const SizedBox(height: 45),
+          Column(children: [
+            ListView.separated(
+              separatorBuilder: (BuildContext context, int index){
+                return const SizedBox(height: 15);
+              },
+              shrinkWrap: true,
+              itemCount: songList.length,
+              itemBuilder: (context, index){
+                var listItem = songList[index];
+                return IsabelaCard(
+                leftText: listItem.name,
+                rightText: " - "+listItem.artist,
+              );
+            })
+          ],),
         ]
       ),
     )
+  ),
+
+  floatingActionButton: FloatingActionButton(
+        onPressed: () {
+           addNewSong(songName: nameController.text, songArtist: artistController.text);
+        },
+        backgroundColor:  Color.fromARGB(255, 77, 63, 202),
+        child: const Icon(Icons.add),
+      ),
   );
   }
 }
