@@ -1,6 +1,7 @@
 # 🎶 ListSongs
 
-Aplicação para adicionar músicas a uma lista criada para o estudo de StatefulWidget e criação de listas em Flutter.
+Aplicação para adicionar músicas a uma lista.
+Projeto criado para o estudo de StatefulWidget e criação de listas em Flutter.
 
 ### 🛠 Tecnologia utilizada:
 * Flutter
