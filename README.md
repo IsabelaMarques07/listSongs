@@ -1,16 +1,22 @@
-# isabela_sir
+# 🎶 ListSongs
 
-A new Flutter project.
+Aplicação com para adicionar músicas a uma lista criada para o estudo de StatefulWidget e criação de listas em Flutter.
 
-## Getting Started
+### 🛠 Tecnologia utilizada:
+* Flutter
 
-This project is a starting point for a Flutter application.
+### 📱 Tela
+<p>
+  <img src="https://user-images.githubusercontent.com/61291155/170831546-abd310d1-aa12-4bae-84db-b3bc8fc0fcd5.gif" width="200px">
+</p>
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Como rodar o projeto
+1. Clone o projeto 
+```
+git clone https://github.com/IsabelaMarques07/listSongs.git
+```
+2. Rode o projeto
+Dentro da pasta do projeto rode o seguinte comando
+```
+flutter run
+```
